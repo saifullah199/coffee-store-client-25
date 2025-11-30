@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Swal from "sweetalert2";
 
 
@@ -19,11 +20,31 @@ const handleDelete = (id) => {
 }).then((result) => {
     
   if (result.isConfirmed) {
-    // Swal.fire({
-    //   title: "Deleted!",
-    //   text: "Your file has been deleted.",
-    //   icon: "success"
-    // });
+
+    // start deleting the coffee
+    fetch(`http://localhost:5000/coffees/${_id}`,{
+        method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => {
+       if(data.deletedCount){
+
+         Swal.fire({
+            title: "Deleted!",
+            text: "Your coffee has been deleted.",
+            icon: "success"
+            });
+       }
+    })
+
+
+
+
+    Swal.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success"
+    });
   }
 });
 }
@@ -43,8 +64,12 @@ const handleDelete = (id) => {
                     </div>
                     <div className="card-actions justify-end">
                         <div className="join join-vertical lg:join-horizontal space-y-2">
-                            <button className="btn join-item">View</button>
-                            <button className="btn join-item">Edit</button>
+                            <Link to={`/coffee/${_id}`}>
+                                <button className="btn join-item">View</button>
+                            </Link>
+                            <Link to={`/updateCoffee/${_id}`}>
+                                <button className="btn join-item">Edit</button>
+                            </Link>
                             <button onClick={() => handleDelete(_id)}
                              className="btn join-item">X</button>
                         </div>
