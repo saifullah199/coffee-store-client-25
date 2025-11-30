@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 
 
 const AddCoffee = () => {
@@ -19,7 +20,14 @@ const AddCoffee = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log('after adding data to db', data)
+            if(data.insertedId){
+
+                Swal.fire({
+                title: "Coffee added Successfully!",
+                icon: "success",
+                draggable: true
+                });
+            }
         })
 
     }
@@ -53,9 +61,9 @@ const AddCoffee = () => {
                         placeholder="Taste name" />
                     </fieldset>
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-                        <label className="label">Category</label>
-                        <input type="text" name="category" className="input w-full" 
-                        placeholder="Coffee name" />
+                        <label className="label">Price</label>
+                        <input type="number" name="price" className="input w-full" 
+                        placeholder="Price your Coffee" />
                     </fieldset>
                     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
                         <label className="label">Details</label>
