@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
 
 
 const UpdateCoffee = () => {
@@ -15,6 +16,25 @@ details } = coffee
         console.log(updatedCoffee)
 
         // send updated coffee to the db
+        fetch(`http://localhost:5000/coffees/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedCoffee)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.modifiedCount){
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Your coffee updated successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                    });
+            }
+        })
     }
 
     return (
