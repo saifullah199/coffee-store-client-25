@@ -3,9 +3,11 @@ import { Link } from 'react-router';
 
 const Header = () => {
     return (
-        <div>
+        <div className='text-center m-6'>
             <Link className='mr-2' to="/">Home</Link>
-            <Link to="addCoffee">Add Coffee</Link>
+            <Link className='mr-2' to="addCoffee">Add Coffee</Link>
+            <Link className='mr-2' to="signin">Sign In</Link>
+            <Link className='mr-2' to="signup">Sign Up</Link>
         </div>
     );
 };
